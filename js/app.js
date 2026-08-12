@@ -4,7 +4,7 @@ const vehicles=[
 {id:'logan',name:'Dacia Logan',type:'Sedan',price:280,image:'assets/car-logan.png',seats:5,gear:'Manual',fuel:'Petrol',text:'Spacious, comfortable and ideal for longer trips across Morocco.'},
 {id:'duster',name:'Dacia Duster',type:'SUV',price:350,image:'assets/car-duster.png',seats:5,gear:'Manual',fuel:'Diesel',text:'A confident SUV for city driving, coast roads and mountain escapes.'},
 {id:'tiguan',name:'Volkswagen Tiguan',type:'Premium SUV',price:600,image:'assets/car-tiguan.png',seats:5,gear:'Automatic',fuel:'Diesel',text:'Premium comfort and composed road manners for business or leisure.'},
-{id:'touareg',name:'Volkswagen Touareg',type:'Luxury SUV',price:900,image:'assets/car-touareg.png',seats:5,gear:'Automatic',fuel:'Diesel',text:'A flagship SUV with refined comfort for a truly premium journey.'}
+{id:'touareg',name:'Volkswagen Touareg',type:'Luxury SUV',price:900,image:'assets/car-touareg.png',seats:5,gear:'Automatic',fuel:'Diesel',text:'A flagship SUV with refined comfort for a truly premium journey.'},
 {id:'kia-sportage-2026',name:'Kia Sportage 2026',type:'Premium SUV',price:700,image:'assets/kia-sportage-2026-4.jpg',seats:5,gear:'Automatic',fuel:'Petrol',text:'The latest Kia Sportage combines a bold modern design with a comfortable interior, advanced technology and confident SUV performance. An excellent choice for city driving and longer journeys across Morocco.'}
 ];
 function menu(){const b=document.querySelector('.menu'),m=document.querySelector('.mobile');if(b&&m)b.onclick=()=>m.classList.toggle('open')}
