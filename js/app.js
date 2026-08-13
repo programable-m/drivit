@@ -10,7 +10,88 @@ const vehicles=[
 function menu(){const b=document.querySelector('.menu'),m=document.querySelector('.mobile');if(b&&m)b.onclick=()=>m.classList.toggle('open')}
 function card(v){return `<article class="car"><a href="vehicle.html?id=${v.id}"><div class="car-img"><img src="${v.image}" alt="${v.name}"></div></a><div class="car-body"><div class="car-top"><span class="tag">${v.type}</span><span class="price">${v.price} MAD/day</span></div><h3>${v.name}</h3><div class="specs"><span>${v.seats} seats</span><span>${v.gear}</span><span>${v.fuel}</span></div><a class="btn btn-gold" href="vehicle.html?id=${v.id}">View vehicle</a></div></article>`}
 function renderFleet(){const grid=document.querySelector('#fleetGrid');if(!grid)return;const q=(document.querySelector('#search')?.value||'').toLowerCase();const type=document.querySelector('#type')?.value||'all';const sort=document.querySelector('#sort')?.value||'default';let list=vehicles.filter(v=>(v.name.toLowerCase().includes(q)||v.type.toLowerCase().includes(q))&&(type==='all'||v.type===type));if(sort==='low')list.sort((a,b)=>a.price-b.price);if(sort==='high')list.sort((a,b)=>b.price-a.price);grid.innerHTML=list.length?list.map(card).join(''):'<div class="empty">No vehicles match your search.</div>'}
-function detail(){const box=document.querySelector('#vehicleDetail');if(!box)return;const id=new URLSearchParams(location.search).get('id')||'duster';const v=vehicles.find(x=>x.id===id)||vehicles[2];box.innerHTML=`<div class="detail-image"><img src="${v.image}" alt="${v.name}"></div><div><span class="kicker">${v.type}</span><h1>${v.name}</h1><div class="detail-price">From ${v.price} MAD / day</div><p>${v.text} drivit provides a clean, inspected vehicle and straightforward service in Tangier.</p><div class="detail-specs"><div class="spec-box"><small>Seats</small><strong>${v.seats} people</strong></div><div class="spec-box"><small>Transmission</small><strong>${v.gear}</strong></div><div class="spec-box"><small>Fuel</small><strong>${v.fuel}</strong></div><div class="spec-box"><small>Location</small><strong>Tangier</strong></div></div><a class="btn btn-gold" href="contact.html?vehicle=${encodeURIComponent(v.name)}">Request this car</a></div>`}
+function detail() {
+    const box = document.querySelector('#vehicleDetail');
+    if (!box) return;
+
+    const id =
+        new URLSearchParams(location.search).get('id') || 'duster';
+
+    const v = vehicles.find(x => x.id === id) || vehicles[2];
+
+    const message =
+        `Hello Drivus, I am interested in renting the ${v.name}. ` +
+        `Please send me availability and pricing.`;
+
+    const whatsappUrl =
+        `https://wa.me/212779063241?text=${encodeURIComponent(message)}`;
+
+    box.innerHTML = `
+        <div class="detail-image">
+            <img src="${v.image}" alt="${v.name}">
+        </div>
+
+        <div>
+            <span class="kicker">${v.type}</span>
+
+            <h1>${v.name}</h1>
+
+            <div class="detail-price">
+                From ${v.price} MAD / day
+            </div>
+
+            <p>
+                ${v.text}
+                Drivus provides a clean, inspected vehicle
+                and straightforward service in Tangier.
+            </p>
+
+            <div class="detail-specs">
+
+                <div class="spec-box">
+                    <small>Seats</small>
+                    <strong>${v.seats} people</strong>
+                </div>
+
+                <div class="spec-box">
+                    <small>Transmission</small>
+                    <strong>${v.gear}</strong>
+                </div>
+
+                <div class="spec-box">
+                    <small>Fuel</small>
+                    <strong>${v.fuel}</strong>
+                </div>
+
+                <div class="spec-box">
+                    <small>Location</small>
+                    <strong>Tangier</strong>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <a
+                    class="btn btn-gold"
+                    href="contact.html?vehicle=${encodeURIComponent(v.name)}"
+                >
+                    Request this car
+                </a>
+
+                <a
+                    class="btn whatsapp-detail-btn"
+                    href="${whatsappUrl}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    WhatsApp
+                </a>
+
+            </div>
+        </div>
+    `;
+}
 function forms(){document.querySelectorAll('form[data-demo]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();const n=f.querySelector('.notice');if(n){n.style.display='block';n.textContent='Thanks — your request is ready. Please call +212 779 063 241 to confirm availability.'}f.reset()}))}
 function booking(){const f=document.querySelector('#bookingForm');if(!f)return;f.addEventListener('submit',e=>{e.preventDefault();const params=new URLSearchParams();params.set('from',f.from.value);params.set('to',f.to.value);params.set('pickup',f.pickup.value);params.set('dropoff',f.dropoff.value);location.href='inventory.html?'+params.toString()})}
 document.addEventListener('DOMContentLoaded',()=>{menu();detail();renderFleet();forms();booking();['search','type','sort'].forEach(id=>document.querySelector('#'+id)?.addEventListener('input',renderFleet));const y=document.querySelectorAll('[data-year]');y.forEach(x=>x.textContent=new Date().getFullYear());const vehicleParam=new URLSearchParams(location.search).get('vehicle');const msg=document.querySelector('#message');if(vehicleParam&&msg)msg.value=`I would like to rent the ${vehicleParam}. Please send me availability and pricing.`});
