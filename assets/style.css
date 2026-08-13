@@ -28,3 +28,11 @@ html[dir="rtl"] .whatsapp-float {
         left: 16px;
     }
 }
+.whatsapp-detail-btn {
+    background: #25d366;
+    color: #fff;
+}
+
+.whatsapp-detail-btn:hover {
+    background: #20bd5a;
+}
